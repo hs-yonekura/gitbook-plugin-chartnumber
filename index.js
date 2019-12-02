@@ -6,9 +6,10 @@ var tableText = 'Table'
 module.exports = {
   book: {
     assets: './assets',
-    css: [
-      'chartnumber.css'
-    ]
+    css: {
+      website: 'chartnumber.css',
+      epub: 'chartnumber.css'
+    }
   },
   hooks: {
     "page": function(page) {
@@ -21,11 +22,12 @@ module.exports = {
       $ = cheerio.load(page.content);
       $('table').each(function(i, table){
         tableCount++;
-        $(table).before('<p class="chartnumber">' + tableText + ": " + page.level.replace(/^1\./, '') + '.-' + tableCount);
+        $(table).before('<p class="chartnumber">' + tableText + ": " + page.level.replace(/^1\./, '') + '. - ' + tableCount);
       });
       $('img').each(function(i, img){
         imageCount++;
-        $(img).before('<p class="chartnumber">' + imageText + ": " + page.level.replace(/^1\./, '') + '.-' + imageCount);
+        var div = $(img).wrap('<div style="page-break-inside: avoid; text-align:center;"></div>')
+        $(img).before('<p class="chartnumber">' + imageText + ": " + page.level.replace(/^1\./, '') + '. - ' + imageCount);
       });
       page.content = $.html();
       return page;
