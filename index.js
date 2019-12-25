@@ -22,6 +22,7 @@ module.exports = {
       $ = cheerio.load(page.content);
       $('table').each(function(i, table){
         tableCount++;
+        var div = $(table).wrap('<div style="text-align:center;"></div>')
         $(table).before('<p class="chartnumber">' + tableText + ": " + page.level.replace(/^1\./, '') + '. - ' + tableCount);
       });
       $('img').each(function(i, img){
