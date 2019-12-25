@@ -25,9 +25,12 @@ module.exports = {
         $(table).before('<p class="chartnumber">' + tableText + ": " + page.level.replace(/^1\./, '') + '. - ' + tableCount);
       });
       $('img').each(function(i, img){
-        imageCount++;
-        var div = $(img).wrap('<div style="page-break-inside: avoid; text-align:center;"></div>')
-        $(img).before('<p class="chartnumber">' + imageText + ": " + page.level.replace(/^1\./, '') + '. - ' + imageCount);
+        if($(img).parent().prop("tagName") === "P" && $(img).parent().parent().prop("tagName") === "BODY" && !$(img).parent().text().trim())
+        {
+          imageCount++;
+          var div = $(img).wrap('<div style="page-break-inside: avoid; text-align:center;"></div>')
+          $(img).before('<p class="chartnumber">' + imageText + ": " + page.level.replace(/^1\./, '') + '. - ' + imageCount);
+        }
       });
       page.content = $.html();
       return page;
