@@ -5,3 +5,10 @@ p.chartnumber {
   font-weight: bold;
   color: #444;
 }
+p.imagenumber {
+  margin-top: 0;
+  text-align: center;
+  margin-bottom: 1em;
+  font-weight: bold;
+  color: #444;
+}
