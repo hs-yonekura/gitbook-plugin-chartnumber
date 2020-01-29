@@ -22,6 +22,12 @@ module.exports = {
       if(this.options.pluginsConfig['chartnumber'].table !== undefined)
         tableText = this.options.pluginsConfig['chartnumber'].table;
       $ = cheerio.load(page.content);
+      if (page.level == '1.1')
+      {
+        console.log(page.level)
+        tableCount = 0;
+        imageCount = 0;
+      }
       var currentNumber = page.level.match(/(?<=^\d+\.)\d+/)
       if (indexNumber < currentNumber) {
         tableCount = 0;
