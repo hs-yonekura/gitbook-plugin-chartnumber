@@ -24,7 +24,6 @@ module.exports = {
       $ = cheerio.load(page.content);
       if (page.level == '1.1')
       {
-        console.log(page.level)
         tableCount = 0;
         imageCount = 0;
       }
@@ -42,7 +41,7 @@ module.exports = {
           $(table).prev('blockquote').remove();
         }
         tableCount++;
-        var div = $(table).wrap('<div style="text-align:center;"></div>')
+        var div = $(table).wrap('<div style="page-break-inside: avoid; text-align:center;"></div>')
         $(table).before('<p class="chartnumber">' + tableText + ". " + currentNumber + ' - ' + tableCount + '&nbsp;&nbsp;' + tableTitle);
       });
       $('img').each(function(i, img){
