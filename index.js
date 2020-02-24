@@ -5,6 +5,7 @@ var tableText = 'Table'
 var indexNumber = 0;
 var tableCount = 0;
 var imageCount = 0;
+var bl = false;
 
 module.exports = {
   book: {
@@ -16,18 +17,23 @@ module.exports = {
   },
   hooks: {
     "page": function(page) {
+      var pageLevel = '';
 
       if(this.options.pluginsConfig['chartnumber'].image !== undefined)
         imageText = this.options.pluginsConfig['chartnumber'].image;
       if(this.options.pluginsConfig['chartnumber'].table !== undefined)
         tableText = this.options.pluginsConfig['chartnumber'].table;
       $ = cheerio.load(page.content);
-      if (page.level == '1.1')
+      if (page.level == '1') bl = true;
+      if (bl) pageLevel = '1.' + page.level;
+      else pageLevel = page.level;
+
+      if (pageLevel == '1.1')
       {
         tableCount = 0;
         imageCount = 0;
       }
-      var currentNumber = page.level.match(/(?<=^\d+\.)\d+/)
+      var currentNumber = pageLevel.match(/(?<=^\d+\.)\d+/)
       if (indexNumber < currentNumber) {
         tableCount = 0;
         imageCount = 0;
