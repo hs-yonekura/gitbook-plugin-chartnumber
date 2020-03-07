@@ -33,7 +33,7 @@ module.exports = {
         tableCount = 0;
         imageCount = 0;
       }
-      var currentNumber = pageLevel.match(/(?<=^\d+\.)\d+/)
+      var currentNumber = Number(pageLevel.match(/(?<=^\d+\.)\d+/))
       if (indexNumber < currentNumber) {
         tableCount = 0;
         imageCount = 0;
