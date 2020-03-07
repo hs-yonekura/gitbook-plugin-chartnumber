@@ -51,13 +51,19 @@ module.exports = {
         $(table).before('<p class="chartnumber">' + tableText + ". " + currentNumber + ' - ' + tableCount + '&nbsp;&nbsp;' + tableTitle);
       });
       $('img').each(function(i, img){
-        if($(img).parent().prop("tagName") === "P" && $(img).parent().parent().prop("tagName") === "BODY" && !$(img).parent().text().trim())
+        if($(img).parent().parent().prop("tagName") === "BODY" && !$(img).parent().text().trim())
         {
           var imageTitle = '';
           if ($(img).parent().prev('blockquote').html())
           {
             imageTitle = $(img).parent().prev('blockquote').text();
             $(img).parent().prev('blockquote').remove();
+          }
+          if ($(img).parent().prev().prev('blockquote').html())
+          {
+            console.log($(img).parent().prev().prev('blockquote').html())
+            imageTitle = $(img).parent().prev().prev('blockquote').text();
+            $(img).parent().prev().prev('blockquote').remove();
           }
           imageCount++;
           var div = $(img).wrap('<div style="page-break-inside: avoid; text-align:center;"></div>')
