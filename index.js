@@ -61,7 +61,6 @@ module.exports = {
           }
           if ($(img).parent().prev().prev('blockquote').html())
           {
-            console.log($(img).parent().prev().prev('blockquote').html())
             imageTitle = $(img).parent().prev().prev('blockquote').text();
             $(img).parent().prev().prev('blockquote').remove();
           }
