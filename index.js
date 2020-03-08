@@ -65,7 +65,7 @@ module.exports = {
             $(img).parent().prev().prev('blockquote').remove();
           }
           imageCount++;
-          var div = $(img).wrap('<div style="page-break-inside: avoid; text-align:center;"></div>')
+          var div = $(img).wrap('<div class="wrap" style="page-break-inside: avoid; text-align:center;"></div>')
           $(img).after('<p class="imagenumber">' + imageText + ". " + currentNumber + ' - ' + imageCount + '&nbsp;&nbsp;' + imageTitle);
         }
       });
