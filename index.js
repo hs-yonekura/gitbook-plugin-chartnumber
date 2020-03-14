@@ -39,6 +39,7 @@ module.exports = {
         imageCount = 0;
         indexNumber = currentNumber;
       }
+      cnt = 0
       $('table').each(function(i, table){
         var tableTitle = '';
         if ($(table).prev('blockquote').html())
@@ -51,6 +52,7 @@ module.exports = {
         $(table).before('<p class="chartnumber">' + tableText + ". " + currentNumber + ' - ' + tableCount + '&nbsp;&nbsp;' + tableTitle);
       });
       $('img').each(function(i, img){
+        var bl = false;
         if($(img).parent().parent().prop("tagName") === "BODY" && !$(img).parent().text().trim())
         {
           var imageTitle = '';
@@ -58,17 +60,24 @@ module.exports = {
           {
             imageTitle = $(img).parent().prev('blockquote').text();
             $(img).parent().prev('blockquote').remove();
-            imageCount++;
-            var div = $(img).wrap('<div class="wrap" style="page-break-inside: avoid; text-align:center;"></div>')
-            $(img).after('<p class="imagenumber">' + imageText + ". " + currentNumber + ' - ' + imageCount + '&nbsp;&nbsp;' + imageTitle);
           }
           if ($(img).parent().prev().prev('blockquote').html())
           {
             imageTitle = $(img).parent().prev().prev('blockquote').text();
             $(img).parent().prev().prev('blockquote').remove();
-            imageCount++;
+            bl = true;
+          }
+          imageCount++;
+          if (bl)
+          {
             var div = $(img).wrap('<div class="wrap" style="page-break-inside: avoid;"></div>')
             $(img).after('<p class="imagenumber">' + imageText + ". " + currentNumber + ' - ' + imageCount + '&nbsp;&nbsp;' + imageTitle);
+          }
+          else
+          {
+            var div = $(img).wrap('<div class="wrap" style="page-break-inside: avoid; text-align:center;"></div>')
+            $(img).after('<p class="imagenumber">' + imageText + ". " + currentNumber + ' - ' + imageCount + '&nbsp;&nbsp;' + imageTitle);
+
           }
         }
       });
