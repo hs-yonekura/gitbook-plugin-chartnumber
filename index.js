@@ -7,6 +7,12 @@ var tableCount = 0;
 var imageCount = 0;
 var bl = false;
 
+function zeroPadding(num,length){
+  return ('0000000000' + num).slice(-length);
+}
+var picCnt = 0
+var tableCnt = 0
+
 module.exports = {
   book: {
     assets: './assets',
@@ -39,8 +45,8 @@ module.exports = {
         imageCount = 0;
         indexNumber = currentNumber;
       }
-      cnt = 0
       $('table').each(function(i, table){
+        tableCnt++;
         var tableTitle = '';
         if ($(table).prev('blockquote').html())
         {
@@ -48,13 +54,14 @@ module.exports = {
           $(table).prev('blockquote').remove();
         }
         tableCount++;
-        var div = $(table).wrap('<div style="page-break-inside: avoid; text-align:center;"></div>')
+        var div = $(table).wrap('<div id="table' + zeroPadding(tableCnt, 6) + '" style="page-break-inside: avoid; text-align:center;"></div>')
         $(table).before('<p class="chartnumber">' + tableText + ". " + currentNumber + ' - ' + tableCount + '&nbsp;&nbsp;' + tableTitle);
       });
       $('img').each(function(i, img){
         var bl = false;
         if($(img).parent().parent().prop("tagName") === "BODY" && !$(img).parent().text().trim())
         {
+          picCnt++;
           var imageTitle = '';
           if ($(img).parent().prev('blockquote').html())
           {
@@ -70,12 +77,12 @@ module.exports = {
           imageCount++;
           if (bl)
           {
-            var div = $(img).wrap('<div class="wrap" style="page-break-inside: avoid;"></div>')
+            var div = $(img).wrap('<div class="wrap" id="pic' + zeroPadding(picCnt, 6) + '" style="page-break-inside: avoid;"></div>')
             $(img).after('<p class="imagenumber">' + imageText + ". " + currentNumber + ' - ' + imageCount + '&nbsp;&nbsp;' + imageTitle);
           }
           else
           {
-            var div = $(img).wrap('<div class="wrap" style="page-break-inside: avoid; text-align:center;"></div>')
+            var div = $(img).wrap('<div class="wrap" id="pic' + zeroPadding(picCnt, 6) + '" style="page-break-inside: avoid; text-align:center;"></div>')
             $(img).after('<p class="imagenumber">' + imageText + ". " + currentNumber + ' - ' + imageCount + '&nbsp;&nbsp;' + imageTitle);
 
           }
