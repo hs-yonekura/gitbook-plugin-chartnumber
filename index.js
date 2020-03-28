@@ -68,10 +68,13 @@ module.exports = {
             imageTitle = $(img).parent().prev('blockquote').text();
             $(img).parent().prev('blockquote').remove();
           }
-          if ($(img).parent().prev().prev('blockquote').html())
+          else if ($(img).parent().prev().prev('blockquote').html())
           {
             imageTitle = $(img).parent().prev().prev('blockquote').text();
             $(img).parent().prev().prev('blockquote').remove();
+            bl = true;
+          }
+          else {
             bl = true;
           }
           imageCount++;
