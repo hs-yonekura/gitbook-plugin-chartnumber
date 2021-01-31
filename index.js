@@ -17,8 +17,7 @@ module.exports = {
   book: {
     assets: './assets',
     css: {
-      website: 'chartnumber.css',
-      epub: 'chartnumber.css'
+      website: 'chartnumber.css'
     }
   },
   hooks: {
